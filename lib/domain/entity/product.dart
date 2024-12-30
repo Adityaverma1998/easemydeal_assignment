@@ -21,3 +21,12 @@ class Product{
     };
   }
 }
+
+class ProductList{
+  final List<Product>? products;
+  ProductList({this.products});
+  factory ProductList.fromJson(List<dynamic> json){
+    List<Product> products = json.map((product)=> Product.fromJson(product)).toList();
+    return ProductList(products: products);
+  }
+}

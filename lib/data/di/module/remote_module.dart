@@ -3,7 +3,7 @@ import 'package:ease_my_deal_assignment/data/data_source/remote/remote_data_sour
 import 'package:ease_my_deal_assignment/di/service_locator.dart';
 
 mixin NetworkModule {
-  static Future<void> configureProductDataSourceModuleInjection() async {
+  static Future<void> configureDataSourceModuleInjection() async {
   
 
         // api's:-------------------------------------------------------------------

@@ -1,3 +1,4 @@
+import 'package:ease_my_deal_assignment/core/constants/routes.dart';
 import 'package:ease_my_deal_assignment/core/constants/strings.dart';
 import 'package:ease_my_deal_assignment/presentation/view/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class MainApp extends StatelessWidget{
       theme: ThemeData(
         primaryColor:Colors.white,
       ),
+      routes: Routes.routes,
+
       home:HomeScreen()
     );
       

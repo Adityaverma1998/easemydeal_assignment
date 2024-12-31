@@ -1,4 +1,7 @@
 
+
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:ease_my_deal_assignment/domain/entity/product.dart';
 import 'package:ease_my_deal_assignment/domain/usecase/product/get_product_usecase.dart';
@@ -24,25 +27,24 @@ class ProductBloc extends Bloc<ProductEvent,ProductState>{
     Future<void> _onFetchProducts(
     FetchProducts event, Emitter<ProductState> emit) async {
   try {
-    emit(const ProductLoading(isLoading: true));
+    emit( ProductLoading(isLoading: true));
 
     final result = await getProductUsecase.call();
-       print('check resut are $result');
     result.fold(
       (failure) {
         // Handle failure case
         emit(ProductError(message: failure.toString()));
       },
-      (products) {
-        // Handle success case
-        emit(ProductLoaded(products: products ?? []));
-      },
+     (products) {
+        if (products != null && products.products != null) {
+   emit(ProductLoaded(products: products));
+       } else {
+   emit(ProductError(message: 'No products available.'));
+        }
+     }
     );
   } catch (error) {
     emit(ProductError(message: error.toString()));
-  }finally{
-        emit(const ProductLoading(isLoading: false));
-
   }
 }
 }

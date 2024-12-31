@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Routes{
   Routes._();
-  static const String  home="/";
+  static const String  home="/home";
     static final routes = <String, WidgetBuilder>{
       home:(BuildContext context)=>  HomeScreen(),
     };

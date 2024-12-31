@@ -1,3 +1,6 @@
+
+import 'dart:developer';
+
 class Product{
   final int id;
   final String title;
@@ -27,6 +30,7 @@ class ProductList{
   ProductList({this.products});
   factory ProductList.fromJson(List<dynamic> json){
     List<Product> products = json.map((product)=> Product.fromJson(product)).toList();
+   
     return ProductList(products: products);
   }
 }

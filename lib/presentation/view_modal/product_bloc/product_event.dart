@@ -7,3 +7,8 @@ abstract class ProductEvent{}
  class FetchProducts extends ProductEvent{
  FetchProducts();
 }
+
+class FetchProductDetails extends ProductEvent{
+  final int id;
+  FetchProductDetails({required this.id});
+}

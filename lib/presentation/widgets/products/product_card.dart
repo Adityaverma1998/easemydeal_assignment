@@ -1,4 +1,5 @@
 import 'package:ease_my_deal_assignment/domain/entity/product.dart';
+import 'package:ease_my_deal_assignment/presentation/view/home/product_details/product_details.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -11,12 +12,12 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print("Product tapped: ${product.title}");
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => ProductDetails(productId: product.id),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetails(productId: product.id),
+          ),
+        );
       },
       child: Card(
         shape: RoundedRectangleBorder(

@@ -4,4 +4,6 @@ import 'package:fpdart/fpdart.dart';
 
 abstract class ProductRepository{
   Future<Either<NetworkException, ProductList?>> getProducts();
+    Future<Either<NetworkException, Product?>> getProductDetails(int id);
+
 }

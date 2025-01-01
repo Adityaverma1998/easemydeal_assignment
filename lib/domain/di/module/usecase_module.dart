@@ -1,5 +1,6 @@
 import 'package:ease_my_deal_assignment/di/service_locator.dart';
 import 'package:ease_my_deal_assignment/domain/repository/product_repository.dart';
+import 'package:ease_my_deal_assignment/domain/usecase/product/get_product_details_usecase.dart';
 import 'package:ease_my_deal_assignment/domain/usecase/product/get_product_usecase.dart';
 
 mixin UseCaseModule {
@@ -8,6 +9,10 @@ mixin UseCaseModule {
     
   getIt.registerSingleton<GetProductUsecase>(
       GetProductUsecase(getIt<ProductRepository>()),
+    ); 
+
+    getIt.registerSingleton<GetProductDetailsUsecase>(
+      GetProductDetailsUsecase(getIt<ProductRepository>()),
     );  
     
   }

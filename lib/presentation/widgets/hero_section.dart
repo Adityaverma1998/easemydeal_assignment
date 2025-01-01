@@ -18,7 +18,7 @@ class HeroSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // Text Content
-          Column(
+          const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -26,11 +26,11 @@ class HeroSection extends StatelessWidget {
                 "Get Winter Discount",
                 style: TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w400,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 8.0), // Spacing between texts
+              SizedBox(height: 2.0), // Spacing between texts
               Text(
                 "20% OFF",
                 style: TextStyle(
@@ -39,12 +39,12 @@ class HeroSection extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 8.0), // Spacing between texts
+              SizedBox(height: 2.0), // Spacing between texts
               Text(
                 "For Children",
                 style: TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w400,
                   color: Colors.white,
                 ),
               ),

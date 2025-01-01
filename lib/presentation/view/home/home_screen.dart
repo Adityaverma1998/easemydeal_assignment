@@ -20,7 +20,20 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const HeroSection(),
-
+            
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                 Text("Latest Product",style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                  color:Colors.black,
+                 ),),
+              
+              ],),
+            ),
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 log("Current state: $state");
@@ -45,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisCount: 2,
                         mainAxisSpacing: 8.0,
                         crossAxisSpacing: 8.0,
-                        childAspectRatio: 0.75,
+                        childAspectRatio: 1.0,
                       ),
                       itemBuilder: (context, index) {
                         final product = products.products![index];

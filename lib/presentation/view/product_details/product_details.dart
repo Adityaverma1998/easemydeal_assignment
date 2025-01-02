@@ -1,3 +1,4 @@
+import 'package:ease_my_deal_assignment/di/service_locator.dart';
 import 'package:ease_my_deal_assignment/presentation/view_modal/product_bloc/product_bloc.dart';
 import 'package:ease_my_deal_assignment/presentation/widgets/primary_layout.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,10 @@ class _ProductDetailsState extends State<ProductDetails> {
     return PrimaryLayout(
       child: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
-          if (state is ProductLoading && state.isLoading) {
+          if (state is ProductDetailsLoading && state.isLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is ProductDetailsLoaded) {
+          } 
+           if (state is ProductDetailsLoaded) {
             final product = state.product;
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +36,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Image.network(
                   product.image ?? '',
                   width: double.infinity,
-                  height: 200,
+                  height: 300,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
@@ -97,11 +99,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ],
             );
-          } else if (state is ProductError) {
+          } 
+           if (state is ProductDetailsError) {
             return Center(
-              child: Text(
-                'Error: ${state.message}',
-                style: const TextStyle(color: Colors.red),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Error: ${state.message}',
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () =>
+                        context.read<ProductBloc>().add(FetchProductDetails(id: widget.productId)),
+                    child: const Text('Retry'),
+                  ),
+                ],
               ),
             );
           } else {

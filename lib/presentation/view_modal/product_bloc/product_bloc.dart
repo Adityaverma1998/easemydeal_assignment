@@ -55,25 +55,25 @@ class ProductBloc extends Bloc<ProductEvent,ProductState>{
    Future<void> _onFetchProductDetails(
     FetchProductDetails event, Emitter<ProductState> emit) async {
   try {
-    emit(ProductLoading(isLoading: true)); // Notify UI about loading
+    emit(const ProductDetailsLoading(isLoading: true)); // Notify UI about loading
 
     final result = await getProductDetailsUsecase.call(params: event.id);
     result.fold(
       (failure) {
         // Handle failure case
-        emit(ProductError(message: failure.message));
+        emit(ProductDetailsError(message: failure.message));
       },
       (product) {
         if (product != null) {
           emit(ProductDetailsLoaded(product: product));
         } else {
-          emit(ProductError(message: 'No product details available.'));
+          emit(const ProductDetailsError(message: 'No product details available.'));
         }
       },
     );
   } catch (error) {
     // Handle any unexpected errors
-    emit(ProductError(message: 'Unexpected error: ${error.toString()}'));
+    emit(ProductDetailsError(message: 'Unexpected error: ${error.toString()}'));
   }
 }
 

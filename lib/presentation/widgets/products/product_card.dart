@@ -1,23 +1,30 @@
+import 'package:ease_my_deal_assignment/di/service_locator.dart';
 import 'package:ease_my_deal_assignment/domain/entity/product.dart';
-import 'package:ease_my_deal_assignment/presentation/view/home/product_details/product_details.dart';
+import 'package:ease_my_deal_assignment/presentation/view/product_details/product_details.dart';
+import 'package:ease_my_deal_assignment/presentation/view_modal/product_bloc/product_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
 
-  const ProductCard({super.key, required this.product});
+   ProductCard({super.key, required this.product});
+
+   final ProductBloc _productBloc = getIt<ProductBloc>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         print("Product tapped: ${product.title}");
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ProductDetails(productId: product.id),
-          ),
-        );
+       Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => ProductDetails(productId: product.id, )),
+).then((_) {
+ _productBloc.add(FetchProducts());});
+
+
+
       },
       child: Card(
         shape: RoundedRectangleBorder(

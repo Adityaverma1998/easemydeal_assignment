@@ -41,3 +41,17 @@ class ProductDetailsLoaded extends ProductState {
   @override
   List<Object?> get props => [product];
 }
+class ProductDetailsLoading extends ProductState {
+  final bool isLoading;
+  const ProductDetailsLoading({required this.isLoading});
+  @override
+  List<Object?> get props => [isLoading];
+}
+class ProductDetailsError extends ProductState {
+  final String message;
+
+  const ProductDetailsError({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}

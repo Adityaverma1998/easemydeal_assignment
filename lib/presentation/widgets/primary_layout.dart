@@ -1,36 +1,53 @@
 import 'package:flutter/material.dart';
 
-class PrimaryLayout  extends StatefulWidget{
-
+class PrimaryLayout extends StatefulWidget {
   final Widget child;
-  const PrimaryLayout({super.key, required this.child});
+  final bool isBack; 
 
- 
+  const PrimaryLayout({
+    super.key,
+    required this.child,
+    this.isBack = true,
+  });
+
+  @override
   _StatePrimaryLayout createState() => _StatePrimaryLayout();
 }
 
-class _StatePrimaryLayout extends State<PrimaryLayout>{
+class _StatePrimaryLayout extends State<PrimaryLayout> {
   @override
   Widget build(BuildContext context) {
-   
-   return Scaffold(appBar:_buildAppbar() ,
-   
-   body: widget.child,
-   );
+    return Scaffold(
+      appBar: _buildAppBar(context, widget.isBack),
+      body: widget.child,
+    );
   }
-
 }
 
- PreferredSizeWidget _buildAppbar(){
+PreferredSizeWidget _buildAppBar(BuildContext context, bool isBack) {
   return AppBar(
-    title:  Text("App bar"),
+    leading: isBack
+        ? IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        : null,
+    title: Text("App Bar"),
     actions: [
-    IconButton(icon: Icon(Icons.search),onPressed: (){},),
-        IconButton(icon: Icon(Icons.favorite),onPressed: (){},),
-            IconButton(icon: Icon(Icons.shopping_cart),onPressed: (){},),
-
-
-
-
-  ],);
+      IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () {},
+      ),
+      IconButton(
+        icon: Icon(Icons.favorite),
+        onPressed: () {},
+      ),
+      IconButton(
+        icon: Icon(Icons.shopping_cart),
+        onPressed: () {},
+      ),
+    ],
+  );
 }

@@ -11,22 +11,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<ProductBloc>(
-          create: (context) => getIt<ProductBloc>()..add(FetchProducts()),
-        ),
-        
-      ],
-      child: MaterialApp(
-        title: Strings.appTitle,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Colors.white,
-        ),
-        routes: Routes.routes,
-        home: HomeScreen(),
-      ),
-    );
+    return  MultiBlocProvider(
+  providers: [
+    BlocProvider<ProductBloc>(
+      create: (context) => getIt<ProductBloc>(),
+    ),
+  ],
+  child: MaterialApp(
+    title: Strings.appTitle,
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      primaryColor: Colors.white,
+    ),
+    routes: Routes.routes,
+    home: HomeScreen(),
+  ),
+);
+
   }
 }

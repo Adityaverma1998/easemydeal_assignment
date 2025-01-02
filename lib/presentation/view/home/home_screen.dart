@@ -8,83 +8,118 @@ import 'package:ease_my_deal_assignment/presentation/widgets/products/product_ca
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final ProductBloc _productBloc = getIt<ProductBloc>();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchProduct();
+  }
+   Future<void> _fetchProduct() async{
+         _productBloc.add(FetchProducts());
+   }
+@override
+void didChangeDependencies() {
+  super.didChangeDependencies();
+
+  if (_productBloc.state is! ProductLoading) {
+   _fetchProduct();
+  }
+}
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return PrimaryLayout(
-      child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const HeroSection(),
-            
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                 Text("Latest Product",style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color:Colors.black,
-                 ),),
-              
-              ],),
-            ),
-            BlocBuilder<ProductBloc, ProductState>(
-              builder: (context, state) {
-                log("Current state: $state");
-
-                if (state is ProductLoading && state.isLoading) {
-                  // Display loading indicator
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is ProductLoaded) {
-                  log("Loaded products: ${state.products}");
-
-                  final products = state.products;
-
-                  if (products.products != null && products.products!.isNotEmpty) {
-                    // Display product grid
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: products.products!.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 8.0,
-                        crossAxisSpacing: 8.0,
-                        childAspectRatio: 1.0,
+      isBack: false,
+      child: RefreshIndicator(
+        onRefresh:_fetchProduct ,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const HeroSection(),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Latest Products",
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
-                      itemBuilder: (context, index) {
-                        final product = products.products![index];
-                        return ProductCard(product: product);
-                      },
-                    );
-                  } else {
+                    ),
+                  ],
+                ),
+              ),
+              BlocBuilder<ProductBloc, ProductState>(
+                bloc: _productBloc,
+                builder: (context, state) {
+                  log("Current state: $state");
+        
+                  if (state is ProductLoading && state.isLoading) {
                     return const Center(
-                      child: Text('No products available.'),
+                      child: CircularProgressIndicator(),
                     );
                   }
-                } else if (state is ProductError) {
-                  return Center(
-                    child: Text(
-                      'Error: ${state.message}',
-                      style: const TextStyle(color: Colors.red),
-                    ),
-                  );
-                } else {
+        
+                  if (state is ProductLoaded) {
+                    final products = state.products.products ?? [];
+                    if (products.isNotEmpty) {
+                      return GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: products.length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 8.0,
+                          crossAxisSpacing: 8.0,
+                          childAspectRatio: 1.0,
+                        ),
+                        itemBuilder: (context, index) {
+                          final product = products[index];
+                          return ProductCard(product: product);
+                        },
+                      );
+                    } else {
+                      return const Center(
+                        child: Text('No products available.'),
+                      );
+                    }
+                  }
+        
+                  if (state is ProductError) {
+                    return Center(
+                      child: Text(
+                        'Error: ${state.message}',
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    );
+                  }
+        
                   return const Center(
-                    child: Text('No products available.'),
+                    child: Text('Unexpected state.'),
                   );
-                }
-              },
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

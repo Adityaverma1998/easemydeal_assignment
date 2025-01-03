@@ -2,10 +2,11 @@ import 'dart:convert';
 
 // Enum for layout options
 enum Layout { single, grid }
+enum Theme {dark,light}
 
 class AppSetting {
   final Layout layout;
-  final String theme;
+  final Theme theme;
   final double padding;
 
   AppSetting({
@@ -21,7 +22,7 @@ class AppSetting {
         (e) => e.name == json['layout'],
         orElse: () => Layout.grid, // Default value if not found
       ),
-      theme: json['theme'] as String,
+      theme: Theme.values.firstWhere((e)=> e.name== json['theme'], orElse: () => Theme.light,),
       padding: (json['padding'] as num).toDouble(),
     );
   }
@@ -30,7 +31,7 @@ class AppSetting {
   Map<String, dynamic> toMap() {
     return {
       'layout': layout.name,
-      'theme': theme,
+      'theme': theme.name,
       'padding': padding,
     };
   }

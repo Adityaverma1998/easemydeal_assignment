@@ -1,27 +1,25 @@
+import 'package:ease_my_deal_assignment/core/constants/strings.dart';
 import 'package:ease_my_deal_assignment/domain/entity/app_setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AppConfigStorage {
-  static const String _configKey = 'appConfig';
+class LocalDataSourceAppSetting {
+  final SharedPreferences _sharedPreferences;
 
-  // Save AppConfig to SharedPreferences
-  static Future<void> saveConfig(AppSetting config) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(_configKey, config.toJson());
+  LocalDataSourceAppSetting(this._sharedPreferences);
+
+  Future<void> saveConfig(AppSetting config) async {
+    await _sharedPreferences.setString(Strings.configKey, config.toJson());
   }
 
-  // Load AppConfig from SharedPreferences
-  static Future<AppSetting> loadConfig() async {
-    final prefs = await SharedPreferences.getInstance();
-    final configString = prefs.getString(_configKey);
+  Future<AppSetting> loadConfig() async {
+    final configString = _sharedPreferences.getString(Strings.configKey);
 
     if (configString != null) {
-      return AppSetting.fromJson(configString as Map<String, dynamic>);
+      return AppSetting.fromJsonString(configString);
     } else {
-      // Return default configuration if no saved data
       return AppSetting(
         layout: Layout.grid,
-        theme: 'dark',
+        theme: Theme.light,
         padding: 8.0,
       );
     }

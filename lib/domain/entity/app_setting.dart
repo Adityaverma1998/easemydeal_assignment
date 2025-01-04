@@ -42,7 +42,7 @@ class AppSetting {
       AppSetting.fromJson(json.decode(source));
 
 
-      AppSetting copyWith({
+    AppSetting copyWith({
     Layout? layout,
     ThemeType? theme,
   }) {
@@ -50,4 +50,5 @@ class AppSetting {
       layout: layout ?? this.layout,
       theme: theme ?? this.theme, padding: 8.0,
     );
+}
 }

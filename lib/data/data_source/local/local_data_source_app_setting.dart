@@ -19,7 +19,7 @@ class LocalDataSourceAppSetting {
     } else {
       return AppSetting(
         layout: Layout.grid,
-        theme: Theme.light,
+        theme: ThemeType.light,
         padding: 8.0,
       );
     }

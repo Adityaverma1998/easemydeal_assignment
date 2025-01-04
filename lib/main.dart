@@ -5,6 +5,7 @@ import 'package:ease_my_deal_assignment/presentation/main_app.dart';
 import 'package:flutter/material.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   await ServiceLocator.configureDependencies();
   runApp( const MainApp());
 }

@@ -2,11 +2,11 @@ import 'dart:convert';
 
 // Enum for layout options
 enum Layout { single, grid }
-enum Theme {dark,light}
+enum ThemeType {dark,light}
 
 class AppSetting {
   final Layout layout;
-  final Theme theme;
+  final ThemeType theme;
   final double padding;
 
   AppSetting({
@@ -21,7 +21,7 @@ class AppSetting {
         (e) => e.name == json['layout'],
         orElse: () => Layout.grid, 
       ),
-      theme: Theme.values.firstWhere((e)=> e.name== json['theme'], orElse: () => Theme.light,),
+      theme: ThemeType.values.firstWhere((e)=> e.name== json['theme'], orElse: () => ThemeType.light,),
       padding: (json['padding'] as num).toDouble(),
     );
   }
@@ -40,4 +40,14 @@ class AppSetting {
   // Factory constructor to create an instance from a JSON string
   factory AppSetting.fromJsonString(String source) =>
       AppSetting.fromJson(json.decode(source));
+
+
+      AppSetting copyWith({
+    Layout? layout,
+    ThemeType? theme,
+  }) {
+    return AppSetting(
+      layout: layout ?? this.layout,
+      theme: theme ?? this.theme, padding: 8.0,
+    );
 }

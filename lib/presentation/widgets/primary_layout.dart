@@ -18,6 +18,7 @@ class _StatePrimaryLayout extends State<PrimaryLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: _buildAppBar(context, widget.isBack),
       body: widget.child,
     );

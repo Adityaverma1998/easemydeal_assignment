@@ -1,3 +1,4 @@
+import 'package:ease_my_deal_assignment/di/service_locator.dart';
 import 'package:ease_my_deal_assignment/domain/entity/app_setting.dart';
 import 'package:ease_my_deal_assignment/presentation/view_modal/app_setting_bloc/app_setting_bloc.dart';
 import 'package:ease_my_deal_assignment/presentation/widgets/primary_layout.dart';
@@ -5,10 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppSettingScreen extends StatelessWidget {
+
+   final AppSettingBloc _appSettingBloc = getIt<AppSettingBloc>();
   @override
   Widget build(BuildContext context) {
     return PrimaryLayout(
       child: BlocBuilder<AppSettingBloc, AppSettingState>(
+        bloc:_appSettingBloc ,
         builder: (context, state) {
           if (state is AppSettingLoadingState) {
             return Center(child: CircularProgressIndicator());

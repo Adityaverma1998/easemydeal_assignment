@@ -1,5 +1,6 @@
 import 'package:ease_my_deal_assignment/core/constants/routes.dart';
 import 'package:ease_my_deal_assignment/core/constants/strings.dart';
+import 'package:ease_my_deal_assignment/domain/entity/app_setting.dart';
 import 'package:ease_my_deal_assignment/presentation/view/home/home_screen.dart';
 import 'package:ease_my_deal_assignment/presentation/view_modal/app_setting_bloc/app_setting_bloc.dart';
 import 'package:ease_my_deal_assignment/presentation/view_modal/product_bloc/product_bloc.dart';
@@ -22,18 +23,23 @@ class MainApp extends StatelessWidget {
         ),
       ],
       child: BlocBuilder<AppSettingBloc, AppSettingState>(
-        
         builder: (context, state) {
-          return  MaterialApp(
-          title: Strings.appTitle,
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primaryColor: Colors.white,
-          ),
-          routes: Routes.routes,
-          home: HomeScreen(),
-        );
-  }),
+          ThemeData theme = ThemeData.light();
+
+            if (state is AppSettingLoadedState &&
+              state.appSetting.theme == ThemeType.dark) {
+            theme = ThemeData.dark(); 
+          }
+
+          return MaterialApp(
+            title: Strings.appTitle,
+            debugShowCheckedModeBanner: false,
+            theme: theme,
+            routes: Routes.routes,
+            home: const HomeScreen(),
+          );
+        },
+      ),
     );
   }
 }

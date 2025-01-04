@@ -76,10 +76,11 @@ class ProductCard extends StatelessWidget {
                 product.title.length > 20
                     ? '${product.title.substring(0, 20)}...'
                     : product.title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14.0,
-                ),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    // fontWeight: FontWeight.w800,
+                    // height: 1.5,
+                    // color: const Color(0xFF737A83)
+                    ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -92,11 +93,13 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     '\$${product.price.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.0,
+                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    // height: 1.5,
+                    // color: const Color(0xFF737A83)
                     ),
-                  ),
+              ),
+                  
                 
                 ],
               ),

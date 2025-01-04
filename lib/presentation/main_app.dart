@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: theme,
             routes: Routes.routes,
-            home: const HomeScreen(),
+            home:  HomeScreen(),
           );
         },
       ),

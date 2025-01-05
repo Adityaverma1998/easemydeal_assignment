@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppSettingScreen extends StatelessWidget {
+  final AppSettingBloc _appSettingBloc = getIt<AppSettingBloc>();
 
-   final AppSettingBloc _appSettingBloc = getIt<AppSettingBloc>();
   @override
   Widget build(BuildContext context) {
     return PrimaryLayout(
       child: BlocBuilder<AppSettingBloc, AppSettingState>(
-        bloc:_appSettingBloc ,
+        bloc: _appSettingBloc,
         builder: (context, state) {
           if (state is AppSettingLoadingState) {
             return Center(child: CircularProgressIndicator());
@@ -37,63 +37,134 @@ class AppSettingScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Select Layout:',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          // Layout Selection
+          _buildSectionTitle('Select Layout:'),
+          Row(
+            children: [
+              _buildRadioOption<Layout>(
+                title: 'Single',
+                value: Layout.single,
+                groupValue: selectedLayout,
+                onChanged: (value) {
+                  _updateSetting(context, appSetting.copyWith(layout: value!));
+                },
+              ),
+              const SizedBox(width: 24),
+              _buildRadioOption<Layout>(
+                title: 'Grid',
+                value: Layout.grid,
+                groupValue: selectedLayout,
+                onChanged: (value) {
+                  _updateSetting(context, appSetting.copyWith(layout: value!));
+                },
+              ),
+            ],
           ),
-          ListTile(
-            title: Text('Single'),
-            leading: Radio<Layout>(
-              value: Layout.single,
-              groupValue: selectedLayout,
-              onChanged: (value) {
-                _updateSetting(context, appSetting.copyWith(layout: value!));
-              },
-            ),
+          const SizedBox(height: 16),
+
+          // Theme Selection
+          _buildSectionTitle('Select Theme:'),
+          Row(
+            children: [
+              _buildRadioOption<ThemeType>(
+                title: 'Light',
+                value: ThemeType.light,
+                groupValue: selectedTheme,
+                onChanged: (value) {
+                  _updateSetting(context, appSetting.copyWith(theme: value!));
+                },
+              ),
+              const SizedBox(width: 24),
+              _buildRadioOption<ThemeType>(
+                title: 'Dark',
+                value: ThemeType.dark,
+                groupValue: selectedTheme,
+                onChanged: (value) {
+                  _updateSetting(context, appSetting.copyWith(theme: value!));
+                },
+              ),
+            ],
           ),
-          ListTile(
-            title: Text('Grid'),
-            leading: Radio<Layout>(
-              value: Layout.grid,
-              groupValue: selectedLayout,
-              onChanged: (value) {
-                _updateSetting(context, appSetting.copyWith(layout: value!));
-              },
-            ),
+          const SizedBox(height: 16),
+
+          // Additional Toggles
+          _buildSwitchOption(
+            context: context,
+            title: 'Show Search Icon',
+            value: appSetting.showSearchIcon,
+            onChanged: (value) {
+              _updateSetting(context, appSetting.copyWith(showSearchIcon: value));
+            },
           ),
-          SizedBox(height: 16),
-          Text(
-            'Select Theme:',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          _buildSwitchOption(
+            context: context,
+            title: 'Show Wishlist Icon',
+            value: appSetting.showWishListIcon,
+            onChanged: (value) {
+              _updateSetting(context, appSetting.copyWith(showWishListIcon: value));
+            },
           ),
-          ListTile(
-            title: Text('Light'),
-            leading: Radio<ThemeType>(
-              value: ThemeType.light,
-              groupValue: selectedTheme,
-              onChanged: (value) {
-                _updateSetting(context, appSetting.copyWith(theme: value!));
-              },
-            ),
-          ),
-          ListTile(
-            title: Text('Dark'),
-            leading: Radio<ThemeType>(
-              value: ThemeType.dark,
-              groupValue: selectedTheme,
-              onChanged: (value) {
-                _updateSetting(context, appSetting.copyWith(theme: value!));
-              },
-            ),
+          _buildSwitchOption(
+            context: context,
+            title: 'Show Cart Icon',
+            value: appSetting.showCartIcon,
+            onChanged: (value) {
+              _updateSetting(context, appSetting.copyWith(showCartIcon: value));
+            },
           ),
         ],
       ),
     );
   }
 
+  // Helper Widget: Section Title
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    );
+  }
+
+  // Helper Widget: Radio Option
+  Widget _buildRadioOption<T>({
+    required String title,
+    required T value,
+    required T groupValue,
+    required void Function(T?) onChanged,
+  }) {
+    return Expanded(
+      child: ListTile(
+        title: Text(title),
+        leading: Radio<T>(
+          value: value,
+          groupValue: groupValue,
+          onChanged: onChanged,
+        ),
+      ),
+    );
+  }
+
+  // Helper Widget: Switch Option
+  Widget _buildSwitchOption({
+    required BuildContext context,
+    required String title,
+    required bool value,
+    required void Function(bool) onChanged,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title, style: const TextStyle(fontSize: 16)),
+        Switch(
+          value: value,
+          onChanged: onChanged,
+        ),
+      ],
+    );
+  }
+
+  // Method to Dispatch Bloc Event
   void _updateSetting(BuildContext context, AppSetting updatedSetting) {
-  BlocProvider.of<AppSettingBloc>(context).add(SaveAppSettingEvent(appSetting: updatedSetting));
-}
-
-
+    context.read<AppSettingBloc>().add(SaveAppSettingEvent(appSetting: updatedSetting));
+  }
 }

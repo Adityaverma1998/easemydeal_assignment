@@ -10,3 +10,4 @@ mixin DataLayerInjection {
     await RepositoryModule.configureRepositoryModuleInjection();
   }
 }
+

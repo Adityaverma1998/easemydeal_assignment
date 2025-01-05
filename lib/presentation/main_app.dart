@@ -26,9 +26,9 @@ class MainApp extends StatelessWidget {
         builder: (context, state) {
           ThemeData theme = ThemeData.light();
 
-            if (state is AppSettingLoadedState &&
+          if (state is AppSettingLoadedState &&
               state.appSetting.theme == ThemeType.dark) {
-            theme = ThemeData.dark(); 
+            theme = ThemeData.dark();
           }
 
           return MaterialApp(
@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: theme,
             routes: Routes.routes,
-            home:  HomeScreen(),
+            home: HomeScreen(),
           );
         },
       ),

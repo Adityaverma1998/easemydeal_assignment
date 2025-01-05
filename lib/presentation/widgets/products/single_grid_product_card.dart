@@ -33,7 +33,6 @@ class SingleLayoutProductCard extends StatelessWidget {
         elevation: 4.0,
         child: Row(
           children: <Widget>[
-            // Product Image
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10.0),
@@ -41,8 +40,8 @@ class SingleLayoutProductCard extends StatelessWidget {
               ),
               child: Image.network(
                 product.image,
-                width: 120, 
-                height: 120, 
+                width: 120,
+                height: 120,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
@@ -69,14 +68,15 @@ class SingleLayoutProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                               Text(
-                           product.category[0].toUpperCase() + product.category.substring(1).toLowerCase(),
-                                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                        ),
-                                 maxLines: 1,
-                           overflow: TextOverflow.ellipsis,
-                           ),
+                    Text(
+                      product.category[0].toUpperCase() +
+                          product.category.substring(1).toLowerCase(),
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
 
                     Text(
                       product.title.length > 50
@@ -96,12 +96,17 @@ class SingleLayoutProductCard extends StatelessWidget {
                       children: [
                         Text(
                           '\$${product.price.toStringAsFixed(2)}',
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.w800,
-                                // color: Colors.green,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                  ),
                         ),
-                        IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_border,color: Colors.white,)),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.favorite_border,
+                              color: Colors.white,
+                            )),
                       ],
                     ),
                   ],

@@ -1,5 +1,3 @@
-
-
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -11,70 +9,61 @@ import 'package:equatable/equatable.dart';
 part 'product_event.dart';
 part 'product_state.dart';
 
-class ProductBloc extends Bloc<ProductEvent,ProductState>{
-  ProductBloc({required this.getProductUsecase, required this.getProductDetailsUsecase}) : super(ProductInitial()) {
+class ProductBloc extends Bloc<ProductEvent, ProductState> {
+  ProductBloc(
+      {required this.getProductUsecase, required this.getProductDetailsUsecase})
+      : super(ProductInitial()) {
     on<FetchProducts>(_onFetchProducts);
     on<FetchProductDetails>(_onFetchProductDetails);
-   }
+  }
 
-    //usecase 
+  //usecase
   final GetProductUsecase getProductUsecase;
   final GetProductDetailsUsecase getProductDetailsUsecase;
 
+  Future<void> _onFetchProducts(
+      FetchProducts event, Emitter<ProductState> emit) async {
+    try {
+      emit(ProductLoading(isLoading: true));
 
-
-
-
-
-   // function to handle event
-    Future<void> _onFetchProducts(
-    FetchProducts event, Emitter<ProductState> emit) async {
-  try {
-    emit( ProductLoading(isLoading: true));
-
-    final result = await getProductUsecase.call();
-    result.fold(
-      (failure) {
-        // Handle failure case
+      final result = await getProductUsecase.call();
+      result.fold((failure) {
         emit(ProductError(message: failure.toString()));
-      },
-     (products) {
+      }, (products) {
         if (products != null && products.products != null) {
-   emit(ProductLoaded(products: products));
-       } else {
-   emit(ProductError(message: 'No products available.'));
-        }
-     }
-    );
-  } catch (error) {
-    emit(ProductError(message: error.toString()));
-  }
-}
-
-// function to handle event
-   Future<void> _onFetchProductDetails(
-    FetchProductDetails event, Emitter<ProductState> emit) async {
-  try {
-    emit(const ProductDetailsLoading(isLoading: true)); // Notify UI about loading
-
-    final result = await getProductDetailsUsecase.call(params: event.id);
-    result.fold(
-      (failure) {
-        // Handle failure case
-        emit(ProductDetailsError(message: failure.message));
-      },
-      (product) {
-        if (product != null) {
-          emit(ProductDetailsLoaded(product: product));
+          emit(ProductLoaded(products: products));
         } else {
-          emit(const ProductDetailsError(message: 'No product details available.'));
+          emit(ProductError(message: 'No products available.'));
         }
-      },
-    );
-  } catch (error) {
-    // Handle any unexpected errors
-    emit(ProductDetailsError(message: 'Unexpected error: ${error.toString()}'));
+      });
+    } catch (error) {
+      emit(ProductError(message: error.toString()));
+    }
   }
-}
 
+  Future<void> _onFetchProductDetails(
+      FetchProductDetails event, Emitter<ProductState> emit) async {
+    try {
+      emit(const ProductDetailsLoading(
+          isLoading: true)); 
+
+      final result = await getProductDetailsUsecase.call(params: event.id);
+      result.fold(
+        (failure) {
+          emit(ProductDetailsError(message: failure.message));
+        },
+        (product) {
+          if (product != null) {
+            emit(ProductDetailsLoaded(product: product));
+          } else {
+            emit(const ProductDetailsError(
+                message: 'No product details available.'));
+          }
+        },
+      );
+    } catch (error) {
+      emit(ProductDetailsError(
+          message: 'Unexpected error: ${error.toString()}'));
+    }
+  }
 }

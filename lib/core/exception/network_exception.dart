@@ -4,8 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:ease_my_deal_assignment/core/network_error_modal/network_error_modal.dart';
 import 'package:equatable/equatable.dart';
 
-
-
 class NetworkException extends Equatable implements Exception {
   late final String message;
   late final int? statusCode;
@@ -44,7 +42,8 @@ class NetworkException extends Equatable implements Exception {
         break;
 
       case DioExceptionType.badResponse:
-        final model = NetworkErrorModel.fromJson(dioException.response?.data as Map<String, dynamic>);
+        final model = NetworkErrorModel.fromJson(
+            dioException.response?.data as Map<String, dynamic>);
         message = model.statusMessage ?? 'Unexpected bad response';
         break;
 

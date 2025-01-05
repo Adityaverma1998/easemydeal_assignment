@@ -4,12 +4,9 @@ import 'package:ease_my_deal_assignment/di/service_locator.dart';
 
 mixin NetworkModule {
   static Future<void> configureDataSourceModuleInjection() async {
-  
-      getIt.registerLazySingleton(()=>DioClient());
-        // api's:-------------------------------------------------------------------
+    getIt.registerLazySingleton(() => DioClient());
+    // api's:-------------------------------------------------------------------
     // API dependencies
     getIt.registerSingleton(ProductRemoteDataSource(getIt<DioClient>()));
-
-    
   }
 }

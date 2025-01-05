@@ -15,5 +15,5 @@ class AppSettingSavedState extends AppSettingState {}
 
 class AppSettingErrorState extends AppSettingState {
   final String error;
-  AppSettingErrorState( this.error);
+  AppSettingErrorState(this.error);
 }

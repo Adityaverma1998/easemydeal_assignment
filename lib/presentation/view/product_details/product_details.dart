@@ -27,8 +27,8 @@ class _ProductDetailsState extends State<ProductDetails> {
         builder: (context, state) {
           if (state is ProductDetailsLoading && state.isLoading) {
             return const Center(child: CircularProgressIndicator());
-          } 
-           if (state is ProductDetailsLoaded) {
+          }
+          if (state is ProductDetailsLoaded) {
             final product = state.product;
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,8 +99,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ],
             );
-          } 
-           if (state is ProductDetailsError) {
+          }
+          if (state is ProductDetailsError) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -111,8 +111,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () =>
-                        context.read<ProductBloc>().add(FetchProductDetails(id: widget.productId)),
+                    onPressed: () => context
+                        .read<ProductBloc>()
+                        .add(FetchProductDetails(id: widget.productId)),
                     child: const Text('Retry'),
                   ),
                 ],

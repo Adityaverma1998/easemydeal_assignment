@@ -35,13 +35,11 @@ class AppThemeData {
   );
 
   static const ColorScheme darkColorScheme = ColorScheme(
-    
     primary: Color(0xFFFFFFFF),
     primaryContainer: Color.fromRGBO(15, 25, 34, 1),
     secondary: Color(0xFF232327),
     secondaryContainer: Color(0xFF451B6F),
     tertiary: Color(0xFFE1E1E1),
-    
     surface: Color(0xFF232327),
     error: Color(0xFFB00020),
     onPrimary: Colors.white,
@@ -90,7 +88,6 @@ class AppThemeData {
     secondary: Color(0xFF232327),
     secondaryContainer: Color(0xFF451B6F),
     tertiary: Color(0xFFE1E1E1),
-
     surface: Color(0xFFC4C4C4),
     background: Color(0xFF5B5858),
     error: Color(0xFFB00020),
@@ -107,119 +104,118 @@ class AppThemeData {
   static const _semiBold = FontWeight.w600;
   static const _bold = FontWeight.w700;
 
-static final TextTheme _lightTextTheme = TextTheme(
-  headlineMedium: GoogleFonts.lato(
-    fontWeight: _bold,
-    fontSize: 24.0,
-    color: Colors.black, 
-  ),
-  bodySmall: GoogleFonts.lato(
-    fontWeight: _semiBold,
-    fontSize: 12.0,
-    color: Colors.grey, 
-  ),
-  headlineSmall: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 20.0,
-    color: Colors.blueGrey, 
-  ),
-  titleMedium: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 18.0,
-    color: const Color(0xFFFFFFFF),
-  ),
-  labelSmall: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 10.0,
-    color: Colors.red, 
-  ),
-  bodyLarge: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 16.0,
-    color: Colors.green,
-  ),
-  titleSmall: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 14.0,
-    color: Color(0xFFE1E1E1), 
-  ),
-  bodyMedium: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 14.0,
-    color: Colors.orange, 
-  ),
-  titleLarge: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 28.0,
-    color: Colors.pink, 
-  ),
-  labelLarge: GoogleFonts.lato(
-    fontWeight: _semiBold,
-    fontSize: 14.0,
-    color: Colors.indigo, 
-  ),
-  labelMedium: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 12.0,
-    color: Colors.brown, 
-  ),
-);
-static final TextTheme _darkTextTheme = TextTheme(
-  headlineMedium: GoogleFonts.lato(
-    fontWeight: _bold,
-    fontSize: 24.0,
-    color: Color(0xFFFFFFF), 
-  ),
-  bodySmall: GoogleFonts.lato(
-    fontWeight: _semiBold,
-    fontSize: 12.0,
-    color: Colors.grey, 
-  ),
-  headlineSmall: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 20.0,
-    color: Colors.blueGrey, 
-  ),
-  titleMedium: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 18.0,
-    color: Colors.deepPurple,
-  ),
-  labelSmall: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 10.0,
-    color: Colors.red, 
-  ),
-  bodyLarge: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 16.0,
-    color: Colors.green,
-  ),
-  titleSmall: GoogleFonts.lato(
-    fontWeight: _medium,
-    fontSize: 14.0,
-    color: Colors.teal, 
-  ),
-  bodyMedium: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 14.0,
-    color: Colors.orange, 
-  ),
-  titleLarge: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 28.0,
-    color: Colors.pink, 
-  ),
-  labelLarge: GoogleFonts.lato(
-    fontWeight: _semiBold,
-    fontSize: 14.0,
-    color: Colors.indigo, 
-  ),
-  labelMedium: GoogleFonts.lato(
-    fontWeight: _regular,
-    fontSize: 12.0,
-    color: Colors.brown, 
-  ),
-);
-
+  static final TextTheme _lightTextTheme = TextTheme(
+    headlineMedium: GoogleFonts.lato(
+      fontWeight: _bold,
+      fontSize: 24.0,
+      color: Colors.black,
+    ),
+    bodySmall: GoogleFonts.lato(
+      fontWeight: _semiBold,
+      fontSize: 12.0,
+      color: Colors.grey,
+    ),
+    headlineSmall: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 20.0,
+      color: Colors.blueGrey,
+    ),
+    titleMedium: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 18.0,
+      color: const Color(0xFFFFFFFF),
+    ),
+    labelSmall: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 10.0,
+      color: Colors.red,
+    ),
+    bodyLarge: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 16.0,
+      color: Colors.green,
+    ),
+    titleSmall: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 14.0,
+      color: Color(0xFFE1E1E1),
+    ),
+    bodyMedium: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 14.0,
+      color: Colors.orange,
+    ),
+    titleLarge: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 28.0,
+      color: Colors.pink,
+    ),
+    labelLarge: GoogleFonts.lato(
+      fontWeight: _semiBold,
+      fontSize: 14.0,
+      color: Colors.indigo,
+    ),
+    labelMedium: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 12.0,
+      color: Colors.brown,
+    ),
+  );
+  static final TextTheme _darkTextTheme = TextTheme(
+    headlineMedium: GoogleFonts.lato(
+      fontWeight: _bold,
+      fontSize: 24.0,
+      color: Color(0xFFFFFFF),
+    ),
+    bodySmall: GoogleFonts.lato(
+      fontWeight: _semiBold,
+      fontSize: 12.0,
+      color: Colors.grey,
+    ),
+    headlineSmall: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 20.0,
+      color: Colors.blueGrey,
+    ),
+    titleMedium: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 18.0,
+      color: Colors.deepPurple,
+    ),
+    labelSmall: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 10.0,
+      color: Colors.red,
+    ),
+    bodyLarge: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 16.0,
+      color: Colors.green,
+    ),
+    titleSmall: GoogleFonts.lato(
+      fontWeight: _medium,
+      fontSize: 14.0,
+      color: Colors.teal,
+    ),
+    bodyMedium: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 14.0,
+      color: Colors.orange,
+    ),
+    titleLarge: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 28.0,
+      color: Colors.pink,
+    ),
+    labelLarge: GoogleFonts.lato(
+      fontWeight: _semiBold,
+      fontSize: 14.0,
+      color: Colors.indigo,
+    ),
+    labelMedium: GoogleFonts.lato(
+      fontWeight: _regular,
+      fontSize: 12.0,
+      color: Colors.brown,
+    ),
+  );
 }

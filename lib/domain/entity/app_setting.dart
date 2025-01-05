@@ -2,6 +2,7 @@ import 'dart:convert';
 
 // Enum for layout options
 enum Layout { single, grid }
+
 enum ThemeType { dark, light }
 
 class AppSetting {

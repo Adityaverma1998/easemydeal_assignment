@@ -8,7 +8,6 @@ import 'package:ease_my_deal_assignment/domain/repository/product_repository.dar
 
 mixin RepositoryModule {
   static Future<void> configureRepositoryModuleInjection() async {
-
     // remote data
     getIt.registerSingleton<ProductRepository>(ProductRepositoryImpl(
       getIt<ProductRemoteDataSource>(),
@@ -17,7 +16,6 @@ mixin RepositoryModule {
     //local data
     getIt.registerSingleton<AppSettingRepository>(AppSettingRepositoryImpl(
       getIt<LocalDataSourceAppSetting>(),
-     ));
-
+    ));
   }
-  }
+}

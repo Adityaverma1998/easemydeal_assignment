@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'dart:io';
 
@@ -17,8 +16,10 @@ class DioClient {
         HttpHeaders.contentTypeHeader: ContentType.json.mimeType,
         HttpHeaders.authorizationHeader: '',
       }
-      ..options.connectTimeout = const Duration(milliseconds: Endpoints.connectTimeout)
-      ..options.receiveTimeout = const Duration(milliseconds: Endpoints.receiveTimeout)
+      ..options.connectTimeout =
+          const Duration(milliseconds: Endpoints.connectTimeout)
+      ..options.receiveTimeout =
+          const Duration(milliseconds: Endpoints.receiveTimeout)
       ..options.responseType = ResponseType.json
       ..interceptors.add(
         PrettyDioLogger(
@@ -27,6 +28,7 @@ class DioClient {
         ),
       );
   }
+
   /// * GET
   Future<Response<dynamic>> get(
     String url, {
@@ -48,6 +50,7 @@ class DioClient {
       rethrow;
     }
   }
+
   /// * POST
   Future<Response<dynamic>> post(
     String uri, {
@@ -73,6 +76,7 @@ class DioClient {
       rethrow;
     }
   }
+
   /// * PUT
   Future<Response<dynamic>> put(
     String uri, {
@@ -98,6 +102,7 @@ class DioClient {
       rethrow;
     }
   }
+
   /// * PATCH
   Future<Response<dynamic>> patch(
     String uri, {
@@ -123,6 +128,7 @@ class DioClient {
       rethrow;
     }
   }
+
   /// * DELETE
   Future<dynamic> delete(
     String uri, {

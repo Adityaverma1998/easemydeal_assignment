@@ -61,12 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             }
-            return  const Center(
-                child: Text(
-                  'Failed to load app settings',
-                  style: TextStyle(color: Colors.red),
-                ),
-              );
+            return const Center(
+              child: Text(
+                'Failed to load app settings',
+                style: TextStyle(color: Colors.red),
+              ),
+            );
           },
         ),
       ),
@@ -83,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
           _buildHeader(),
           BlocBuilder<ProductBloc, ProductState>(
             bloc: _productBloc,
-            builder: (context, state) => _buildProductSection(state, useGridLayout),
+            builder: (context, state) =>
+                _buildProductSection(state, useGridLayout),
           ),
         ],
       ),

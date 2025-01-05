@@ -9,10 +9,10 @@ import 'package:ease_my_deal_assignment/domain/usecase/product/get_product_useca
 mixin UseCaseModule {
   static Future<void> configureUseCaseModuleInjection() async {
     // user:--------------------------------------------------------------------
-    
-  getIt.registerSingleton<GetProductUsecase>(
+
+    getIt.registerSingleton<GetProductUsecase>(
       GetProductUsecase(getIt<ProductRepository>()),
-    ); 
+    );
 
     getIt.registerSingleton<GetProductDetailsUsecase>(
       GetProductDetailsUsecase(getIt<ProductRepository>()),
@@ -20,11 +20,9 @@ mixin UseCaseModule {
 
     getIt.registerSingleton<GetAppSettingUsecase>(
       GetAppSettingUsecase(getIt<AppSettingRepository>()),
-    );  
+    );
     getIt.registerSingleton<UpdateAppSettingUsecase>(
       UpdateAppSettingUsecase(getIt<AppSettingRepository>()),
-    );  
-    
+    );
   }
-    
 }

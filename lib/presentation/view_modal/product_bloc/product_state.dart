@@ -6,6 +6,7 @@ abstract class ProductState extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
 class ProductInitial extends ProductState {}
 
 class ProductLoading extends ProductState {
@@ -15,15 +16,15 @@ class ProductLoading extends ProductState {
   List<Object?> get props => [isLoading];
 }
 
-
 class ProductLoaded extends ProductState {
   final ProductList products;
 
   const ProductLoaded({required this.products});
-    
+
   @override
   List<Object?> get props => [products];
 }
+
 class ProductError extends ProductState {
   final String message;
 
@@ -36,17 +37,19 @@ class ProductError extends ProductState {
 class ProductDetailsLoaded extends ProductState {
   final Product product;
 
-   const ProductDetailsLoaded({required this.product});
-    
+  const ProductDetailsLoaded({required this.product});
+
   @override
   List<Object?> get props => [product];
 }
+
 class ProductDetailsLoading extends ProductState {
   final bool isLoading;
   const ProductDetailsLoading({required this.isLoading});
   @override
   List<Object?> get props => [isLoading];
 }
+
 class ProductDetailsError extends ProductState {
   final String message;
 

@@ -8,23 +8,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
 
-   ProductCard({super.key, required this.product});
+  ProductCard({super.key, required this.product});
 
-   final ProductBloc _productBloc = getIt<ProductBloc>();
+  final ProductBloc _productBloc = getIt<ProductBloc>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         print("Product tapped: ${product.title}");
-       Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => ProductDetails(productId: product.id, )),
-).then((_) {
- _productBloc.add(FetchProducts());});
-
-
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProductDetails(
+                    productId: product.id,
+                  )),
+        ).then((_) {
+          _productBloc.add(FetchProducts());
+        });
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -34,12 +35,10 @@ class ProductCard extends StatelessWidget {
         elevation: 4.0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min, 
-          
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                ClipRRect(
+            Stack(children: <Widget>[
+              ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10.0),
                   topRight: Radius.circular(10.0),
@@ -47,7 +46,7 @@ class ProductCard extends StatelessWidget {
                 child: Image.network(
                   product.image,
                   width: double.infinity,
-                  height: 120, 
+                  height: 120,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
@@ -65,22 +64,22 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: 8.0,
-                top:8.0,
-                child: IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_border,color: Colors.white,)))
-              ]
-            ),
+                  right: 8.0,
+                  top: 8.0,
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.favorite_border,
+                        color: Colors.white,
+                      )))
+            ]),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 product.title.length > 20
                     ? '${product.title.substring(0, 20)}...'
                     : product.title,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    // fontWeight: FontWeight.w800,
-                    // height: 1.5,
-                    // color: const Color(0xFF737A83)
-                    ),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -93,14 +92,10 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     '\$${product.price.toStringAsFixed(2)}',
-                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    // height: 1.5,
-                    // color: const Color(0xFF737A83)
-                    ),
-              ),
-                  
-                
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
                 ],
               ),
             ),

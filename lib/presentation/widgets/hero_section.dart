@@ -11,13 +11,12 @@ class HeroSection extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        color: Color(0xFF6055D8), // Background color
+        color: Color(0xFF6055D8),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          // Text Content
           const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +29,7 @@ class HeroSection extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 2.0), // Spacing between texts
+              SizedBox(height: 2.0),
               Text(
                 "20% OFF",
                 style: TextStyle(
@@ -39,7 +38,7 @@ class HeroSection extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 2.0), // Spacing between texts
+              SizedBox(height: 2.0),
               Text(
                 "For Children",
                 style: TextStyle(
@@ -50,10 +49,9 @@ class HeroSection extends StatelessWidget {
               ),
             ],
           ),
-         
           Image.asset(
             'assets/images/child.png',
-            height: 150.0, 
+            height: 150.0,
             fit: BoxFit.cover,
           ),
         ],

@@ -93,7 +93,8 @@ class AppSettingScreen extends StatelessWidget {
             title: 'Show Search Icon',
             value: appSetting.showSearchIcon,
             onChanged: (value) {
-              _updateSetting(context, appSetting.copyWith(showSearchIcon: value));
+              _updateSetting(
+                  context, appSetting.copyWith(showSearchIcon: value));
             },
           ),
           _buildSwitchOption(
@@ -101,7 +102,8 @@ class AppSettingScreen extends StatelessWidget {
             title: 'Show Wishlist Icon',
             value: appSetting.showWishListIcon,
             onChanged: (value) {
-              _updateSetting(context, appSetting.copyWith(showWishListIcon: value));
+              _updateSetting(
+                  context, appSetting.copyWith(showWishListIcon: value));
             },
           ),
           _buildSwitchOption(
@@ -117,7 +119,6 @@ class AppSettingScreen extends StatelessWidget {
     );
   }
 
-  // Helper Widget: Section Title
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
@@ -125,7 +126,6 @@ class AppSettingScreen extends StatelessWidget {
     );
   }
 
-  // Helper Widget: Radio Option
   Widget _buildRadioOption<T>({
     required String title,
     required T value,
@@ -144,7 +144,6 @@ class AppSettingScreen extends StatelessWidget {
     );
   }
 
-  // Helper Widget: Switch Option
   Widget _buildSwitchOption({
     required BuildContext context,
     required String title,
@@ -165,6 +164,8 @@ class AppSettingScreen extends StatelessWidget {
 
   // Method to Dispatch Bloc Event
   void _updateSetting(BuildContext context, AppSetting updatedSetting) {
-    context.read<AppSettingBloc>().add(SaveAppSettingEvent(appSetting: updatedSetting));
+    context
+        .read<AppSettingBloc>()
+        .add(SaveAppSettingEvent(appSetting: updatedSetting));
   }
 }

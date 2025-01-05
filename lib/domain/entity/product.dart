@@ -1,7 +1,6 @@
-
 import 'dart:developer';
 
-class Product{
+class Product {
   final int id;
   final String title;
   final dynamic price;
@@ -10,29 +9,41 @@ class Product{
   final String category;
   final Rating rating;
 
-  Product({required this.description,required this.id,required this.image,required this.price,required this.title,required this.category,required this.rating});
-  
-  factory Product.fromJson(Map<String,dynamic> json){
-    return Product(id: json['id'],title:json['title'], description: json['description'],price:json['price'], image:json['image'],category:json['category'],
-    rating: Rating.fromJson(json['rating']),
-     );
+  Product(
+      {required this.description,
+      required this.id,
+      required this.image,
+      required this.price,
+      required this.title,
+      required this.category,
+      required this.rating});
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      price: json['price'],
+      image: json['image'],
+      category: json['category'],
+      rating: Rating.fromJson(json['rating']),
+    );
   }
 
-  Map<String,dynamic> toJson(){
-    return{
-      'id':id,
-      'title':title,
-      'description':description,
-      'price':price,
-      'image':image,
-      'category':category,
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'price': price,
+      'image': image,
+      'category': category,
       'rating': rating.toJson(),
-      
     };
   }
 }
 
-  class Rating {
+class Rating {
   final double rate;
   final int count;
 
@@ -56,13 +67,13 @@ class Product{
   }
 }
 
-
-class ProductList{
+class ProductList {
   final List<Product>? products;
   ProductList({this.products});
-  factory ProductList.fromJson(List<dynamic> json){
-    List<Product> products = json.map((product)=> Product.fromJson(product)).toList();
-   
+  factory ProductList.fromJson(List<dynamic> json) {
+    List<Product> products =
+        json.map((product) => Product.fromJson(product)).toList();
+
     return ProductList(products: products);
   }
 }

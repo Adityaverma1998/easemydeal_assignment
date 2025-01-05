@@ -12,16 +12,14 @@ mixin StoreModule {
     getIt.registerSingleton<ProductBloc>(
       ProductBloc(
         getProductUsecase: getIt<GetProductUsecase>(),
-        getProductDetailsUsecase:getIt<GetProductDetailsUsecase>(),
-       
+        getProductDetailsUsecase: getIt<GetProductDetailsUsecase>(),
       ),
     );
 
     getIt.registerSingleton<AppSettingBloc>(
-      AppSettingBloc(appSettingUsecase: getIt<GetAppSettingUsecase>(), updateAppSettingUsecase: getIt<UpdateAppSettingUsecase>()
-       
-       
-      ),
+      AppSettingBloc(
+          appSettingUsecase: getIt<GetAppSettingUsecase>(),
+          updateAppSettingUsecase: getIt<UpdateAppSettingUsecase>()),
     );
   }
 }

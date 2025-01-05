@@ -7,16 +7,12 @@ class AppSettingRepositoryImpl implements AppSettingRepository {
   AppSettingRepositoryImpl(this._localDataSourceAppSetting);
 
   @override
-  Future<void> changeAppConfig(AppSetting config) async{
+  Future<void> changeAppConfig(AppSetting config) async {
     await _localDataSourceAppSetting.saveConfig(config);
   }
-  
+
   @override
-  Future<AppSetting> getAppConfig() async{
+  Future<AppSetting> getAppConfig() async {
     return await _localDataSourceAppSetting.loadConfig();
   }
-
-
-
-
 }

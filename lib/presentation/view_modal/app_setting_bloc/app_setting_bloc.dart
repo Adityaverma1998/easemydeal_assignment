@@ -37,7 +37,7 @@ class AppSettingBloc extends Bloc<AppSettingEvent, AppSettingState> {
   ) async {
     emit(AppSettingLoadingState());
     try {
-      await updateAppSettingUsecase.call(params: event.appSetting );
+      await updateAppSettingUsecase.call(params: event.appSetting);
       emit(AppSettingSavedState());
     } catch (error) {
       emit(AppSettingErrorState('Failed to save app settings: $error'));

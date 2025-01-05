@@ -90,7 +90,11 @@ PreferredSizeWidget _buildAppBar(BuildContext context, bool isBack) {
           );
         } else if (state is AppSettingLoadingState) {
           return AppBar(
-            title: const Text("EaseMyDeal"),
+            title:  Text("EaseMyDeal",style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+        fontWeight: FontWeight.w400,
+        // color: Colors.blueAccent,
+        letterSpacing: 1.2,
+      )),
             actions: [Center(child: CircularProgressIndicator())],
           );
         } else {

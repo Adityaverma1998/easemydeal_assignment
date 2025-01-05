@@ -41,8 +41,8 @@ class SingleLayoutProductCard extends StatelessWidget {
               ),
               child: Image.network(
                 product.image,
-                width: 120, // Set a fixed width
-                height: 120, // Maintain a square image
+                width: 120, 
+                height: 120, 
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
@@ -69,14 +69,15 @@ class SingleLayoutProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      product.category,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                               Text(
+                           product.category[0].toUpperCase() + product.category.substring(1).toLowerCase(),
+                                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                        ),
+                                 maxLines: 1,
+                           overflow: TextOverflow.ellipsis,
+                           ),
+
                     Text(
                       product.title.length > 50
                           ? '${product.title.substring(0, 50)}...'

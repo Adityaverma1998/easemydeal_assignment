@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PrimaryLayout extends StatefulWidget {
   final Widget child;
-  final bool isBack; 
+  final bool isBack;
 
   const PrimaryLayout({
     super.key,
@@ -20,7 +20,6 @@ class PrimaryLayout extends StatefulWidget {
 }
 
 class _StatePrimaryLayout extends State<PrimaryLayout> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,52 +31,89 @@ class _StatePrimaryLayout extends State<PrimaryLayout> {
 }
 
 PreferredSizeWidget _buildAppBar(BuildContext context, bool isBack) {
-     final AppSettingBloc _appSettingBloc = getIt<AppSettingBloc>();
+  final AppSettingBloc _appSettingBloc = getIt<AppSettingBloc>();
 
-  return AppBar(
-    leading: isBack
-        ? IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-        : null,
-    title: Text("EasyMyDeal", style: Theme.of(context).textTheme.headlineLarge,),
-    actions: [
-      IconButton(
-        icon: Icon(Icons.search),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(Icons.favorite),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(Icons.shopping_cart),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: Icon(Icons.settings),
-        onPressed: () {    
-          Navigator.of(context).push(
-  MaterialPageRoute(
-    builder: (context) {
-      // Dispatch LoadAppSettingEvent as soon as the AppSettingScreen is built
-      // This ensures that the settings are loaded when the screen is shown
-      BlocProvider.of<AppSettingBloc>(context).add(LoadAppSettingEvent());
-      
-      // Return the AppSettingScreen wrapped with BlocProvider to make AppSettingBloc available
-      return BlocProvider.value(
-        value: _appSettingBloc,
-        child: AppSettingScreen(),
-      );
-    },
-  ),
-);
-     
-                   },
-      ),
-    ],
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(kToolbarHeight),
+    child: BlocBuilder<AppSettingBloc, AppSettingState>(
+      bloc: _appSettingBloc,
+      builder: (context, state) {
+        if (state is AppSettingLoadedState) {
+          final appSetting = state.appSetting;
+
+          return AppBar(
+            leading: isBack
+                ? IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                : null,
+            title: Text(
+              "EaseMyDeal",
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            actions: [
+              if (appSetting.showSearchIcon)
+                IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {},
+                ),
+              if (appSetting.showWishListIcon)
+                IconButton(
+                  icon: const Icon(Icons.favorite),
+                  onPressed: () {},
+                ),
+              if (appSetting.showCartIcon)
+                IconButton(
+                  icon: const Icon(Icons.shopping_cart),
+                  onPressed: () {},
+                ),
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        _appSettingBloc.add(LoadAppSettingEvent());
+                        return BlocProvider.value(
+                          value: _appSettingBloc,
+                          child: AppSettingScreen(),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        } else if (state is AppSettingLoadingState) {
+          return AppBar(
+            title: const Text("EaseMyDeal"),
+            actions: [Center(child: CircularProgressIndicator())],
+          );
+        } else {
+          return AppBar(
+            title: const Text("EaseMyDeal"),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider.value(
+                        value: _appSettingBloc,
+                        child: AppSettingScreen(),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        }
+      },
+    ),
   );
 }

@@ -21,6 +21,9 @@ class LocalDataSourceAppSetting {
         layout: Layout.grid,
         theme: ThemeType.light,
         padding: 8.0,
+        showCartIcon: true,
+        showSearchIcon: true,
+        showWishListIcon: true,
       );
     }
   }

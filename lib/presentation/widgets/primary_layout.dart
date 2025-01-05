@@ -43,7 +43,7 @@ PreferredSizeWidget _buildAppBar(BuildContext context, bool isBack) {
             },
           )
         : null,
-    title: Text("App Bar"),
+    title: Text("EasyMyDeal", style: Theme.of(context).textTheme.headlineLarge,),
     actions: [
       IconButton(
         icon: Icon(Icons.search),
